@@ -21,7 +21,10 @@ namespace Api.Controllers
         public IActionResult SaveCandidate([FromBody] CandidateDto candidateRequest)
         {
              
-
+            if (candidateRequest.Email == null)
+            {
+                return BadRequest("The Email field is required.");
+            }
             _candidateService.UpsertCandidate(candidateRequest);
             return Ok();
         }
