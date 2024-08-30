@@ -9,6 +9,6 @@ namespace Application.Interfaces
 {
     public interface ICandidateService
     {
-         void SaveCandidate(CandidateDto candidateDto);
-    }
+        void  UpsertCandidate(CandidateDto candidateDto);
+     }
 }

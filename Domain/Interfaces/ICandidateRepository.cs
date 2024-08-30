@@ -11,6 +11,8 @@ namespace Domain.Interfaces
     {
         Candidate GetByEmail(string email);
         void Save(Candidate candidate);
+        void Update(Candidate candidate);
+
         List<Candidate> GetAllCandidates();
     }
 }

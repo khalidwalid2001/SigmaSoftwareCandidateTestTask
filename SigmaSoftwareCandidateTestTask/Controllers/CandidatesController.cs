@@ -18,21 +18,11 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveCandidate([FromBody] CandidateRequestModel candidateRequest)
+        public IActionResult SaveCandidate([FromBody] CandidateDto candidateRequest)
         {
-            var candidateDto = new CandidateDto
-            {
-                FirstName = candidateRequest.FirstName,
-                LastName = candidateRequest.LastName,
-                Email = candidateRequest.Email,
-                PhoneNumber = candidateRequest.PhoneNumber,
-                PreferredCallTime = candidateRequest.PreferredCallTime,
-                LinkedInProfileUrl = candidateRequest.LinkedInProfileUrl,
-                GitHubProfileUrl = candidateRequest.GitHubProfileUrl,
-                Comments = candidateRequest.Comments
-            };
+             
 
-            _candidateService.SaveCandidate(candidateDto);
+            _candidateService.UpsertCandidate(candidateRequest);
             return Ok();
         }
 
