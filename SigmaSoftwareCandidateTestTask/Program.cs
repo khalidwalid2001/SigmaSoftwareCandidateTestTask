@@ -5,16 +5,23 @@ using Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
- 
+// Add services to the container.
 builder.Services.AddControllers();
- builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Retrieve the CSV path from the configuration
+var csvPath = builder.Configuration.GetValue<string>("CsvPath");
+
+// Register dependencies with dependency injection
 builder.Services.AddScoped<ICandidateRepository, CsvCandidateRepository>(provider =>
-            new CsvCandidateRepository("C:\\Users\\Thinkpad_3\\Downloads\\generated_data.csv"));
+    new CsvCandidateRepository(csvPath));
 builder.Services.AddScoped<ICandidateService, CandidateService>();
+
 var app = builder.Build();
- 
- if (app.Environment.IsDevelopment())
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
